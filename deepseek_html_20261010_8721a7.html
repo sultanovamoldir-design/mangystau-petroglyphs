@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Маңғыстау петроглифтерін цифрландыру жобасы">
+<title>Mangystau Petroglyphs | Тасқа жазылған тарих</title>
+<style>
+:root{
+  --sand:#eee2cc;--sand-light:#f8f3e9;--ink:#25231f;--brown:#5e4632;
+  --rust:#a65e3b;--line:#d8c9b1;--white:#fffdf8;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--sand-light);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.6}
+a{color:inherit}
+header{position:sticky;top:0;z-index:10;background:rgba(248,243,233,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{max-width:1180px;margin:auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.brand{font-weight:800;letter-spacing:.04em;font-size:13px;display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+.brand-mark{width:35px;height:35px;border-radius:50%;display:grid;place-items:center;background:var(--brown);color:var(--sand-light);font-size:18px}
+nav{display:flex;gap:18px;flex-wrap:wrap}
+nav a{text-decoration:none;font-size:13px;font-weight:700;color:#625849;cursor:pointer}
+nav a:hover{color:var(--rust)}
+.lang-switcher{display:flex;gap:0;border:1px solid var(--line);border-radius:5px;overflow:hidden}
+.lang-btn{border:0;background:transparent;padding:7px 13px;font-size:12px;font-weight:800;cursor:pointer;color:#625849;transition:.2s}
+.lang-btn.active{background:var(--brown);color:#fff}
+.hero{min-height:560px;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:30px;max-width:1180px;margin:auto;padding:60px 22px}
+.eyebrow{font-size:12px;letter-spacing:.19em;text-transform:uppercase;font-weight:800;color:var(--rust)}
+h1{font-family:Georgia,serif;font-size:clamp(38px,5.5vw,68px);line-height:1.05;letter-spacing:-.03em;margin:18px 0}
+h1 em{color:var(--rust);font-weight:400;font-style:italic}
+.lead{font-size:17px;color:#655b4d;max-width:550px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.btn{border:0;border-radius:6px;padding:13px 20px;background:var(--brown);color:#fff;text-decoration:none;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:14px;transition:.2s}
+.btn:hover{background:#4a3726;transform:translateY(-1px)}
+.btn.secondary{background:transparent;color:var(--brown);border:1.5px solid var(--brown)}
+.btn.secondary:hover{background:var(--brown);color:#fff}
+.hero-art{min-height:380px;border-radius:10px;overflow:hidden;position:relative;background:linear-gradient(145deg,#c9a77c,#8e6849 55%,#4a3a2d);display:flex;align-items:flex-end;justify-content:flex-start}
+.hero-art svg{width:100%;height:100%;position:absolute;inset:0}
+.art-label{position:relative;z-index:1;padding:24px;color:#fff8eb}
+.art-label strong{display:block;font-family:Georgia,serif;font-size:22px}
+.art-label span{font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.85}
+section{padding:70px 22px}
+.container{max-width:1120px;margin:auto}
+.section-head{margin-bottom:28px}
+.pill{display:inline-block;border:1px solid var(--line);border-radius:30px;padding:6px 11px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--brown);font-weight:700;background:var(--white)}
+h2{font-family:Georgia,serif;font-size:clamp(28px,3.5vw,42px);line-height:1.15;margin:10px 0}
+.catalog-tools{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px}
+input,select,textarea{font:inherit;border:1.5px solid var(--line);background:var(--white);padding:12px 14px;border-radius:6px;color:var(--ink);outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--rust)}
+input{flex:1;min-width:220px}
+select{min-width:190px;cursor:pointer}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:var(--white);border:1px solid var(--line);border-radius:10px;overflow:hidden;transition:transform .25s,box-shadow .25s;cursor:pointer}
+.card:hover{transform:translateY(-4px);box-shadow:0 16px 32px #4a3a2d18}
+.card-img{height:200px;background:linear-gradient(135deg,#c5a37a,#78583f);display:grid;place-items:center;position:relative;overflow:hidden}
+.card-img svg{width:100%;height:100%;padding:20px}
+.card-body{padding:20px}
+.card-body h3{font-family:Georgia,serif;font-size:22px;margin:8px 0 6px;line-height:1.2}
+.card-body p{font-size:13px;color:#6c6153;margin:6px 0}
+.card-meta{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--rust);font-weight:800}
+.notice{background:#f2e9da;border-left:4px solid var(--rust);padding:14px 18px;color:#5f5548;font-size:13px;margin-top:24px;border-radius:0 6px 6px 0}
+.qr-section{background:#e9ddc7}
+.qr-layout{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
+.qr-box{background:#fff;border:1px solid var(--line);border-radius:10px;padding:28px;text-align:center}
+.qr-box input{width:100%;min-width:0;margin:10px 0}
+#qrPreview{margin:18px auto;width:200px;min-height:200px;display:grid;place-items:center;background:#f8f3e9;border-radius:8px;padding:8px}
+#qrPreview img{max-width:100%;height:auto}
+#qrPreview .placeholder{font-size:12px;color:#8a7f6f;padding:20px}
+footer{background:#282720;color:#e9ddc7;padding:36px 22px}
+.footer-inner{max-width:1120px;margin:auto;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer p{margin:4px 0;color:#bdb29d;font-size:12px}
+footer strong{color:#e9ddc7;font-family:Georgia,serif;font-size:16px}
+/* Жеке петроглиф беті */
+.petroglyph-page{max-width:900px;margin:auto;padding:40px 22px}
+.petroglyph-page .back{display:inline-flex;align-items:center;gap:6px;color:var(--rust);font-weight:700;text-decoration:none;font-size:14px;margin-bottom:20px;cursor:pointer}
+.petroglyph-page h1{font-size:clamp(32px,5vw,52px);margin:12px 0}
+.petroglyph-page .period-badge{display:inline-block;background:var(--rust);color:#fff;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:800;letter-spacing:.05em}
+.petroglyph-page .coords{color:#7a6f5f;font-size:13px;margin:12px 0;font-family:monospace}
+.petroglyph-page .main-image{width:100%;max-width:800px;height:auto;border-radius:10px;margin:24px 0;background:linear-gradient(135deg,#c5a37a,#78583f);min-height:300px;display:grid;place-items:center}
+.petroglyph-page .main-image svg{max-width:80%;max-height:300px}
+.petroglyph-page .main-image img{width:100%;height:auto;border-radius:10px}
+.desc-block{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:26px;margin:20px 0}
+.desc-block h3{font-family:Georgia,serif;font-size:20px;margin:0 0 12px}
+.desc-block .source{font-size:12px;color:#7a6f5f;font-style:italic;border-left:3px solid var(--rust);padding-left:12px;margin-top:16px}
+.speak-btn{margin-top:16px;background:var(--rust)}
+.speak-btn:hover{background:#8b4a2e}
+.hidden{display:none!important}
+@media(max-width:800px){
+  .hero{grid-template-columns:1fr;padding-top:40px;min-height:auto}
+  .hero-art{min-height:280px}
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .qr-layout{grid-template-columns:1fr}
+  .nav{gap:12px}
+}
+@media(max-width:540px){
+  .cards{grid-template-columns:1fr}
+  nav{order:3;width:100%;justify-content:center}
+  .nav{padding:12px 16px}
+  .brand{font-size:11px}
+  section{padding:50px 18px}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ БАСТЫ БЕТ ============ -->
+<div id="homePage">
+
+  <header>
+    <div class="nav">
+      <a class="brand" onclick="showHome()">
+        <span class="brand-mark">⌁</span>
+        <span>MANGYSTAU<br>PETROGLYPHS</span>
+      </a>
+      <nav>
+        <a onclick="scrollToSection('catalog')" data-key="nav.catalog">Каталог</a>
+        <a onclick="scrollToSection('about')" data-key="nav.about">Жоба туралы</a>
+        <a onclick="scrollToSection('qr')" data-key="nav.qr">QR-гид</a>
+      </nav>
+      <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLang('kz')">KZ</button>
+        <button class="lang-btn" onclick="setLang('ru')">RU</button>
+        <button class="lang-btn" onclick="setLang('en')">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="about">
+      <div>
+        <div class="eyebrow" data-key="hero.eyebrow">Цифрлық мұра · Маңғыстау</div>
+        <h1 data-key="hero.title">Тасқа жазылған <em>тарих.</em></h1>
+        <p class="lead" data-key="hero.lead">Ежелгі петроглифтерді цифрлық каталогқа біріктіріп, жасанды интеллект көмегімен зерттеуге және QR-код арқылы көпшілікке таныстыруға арналған жоба.</p>
+        <div class="actions">
+          <button class="btn" onclick="scrollToSection('catalog')" data-key="hero.btn1">Каталогты қарау ↘</button>
+          <button class="btn secondary" onclick="scrollToSection('qr')" data-key="hero.btn2">QR-код жасау</button>
+        </div>
+      </div>
+      <div class="hero-art">
+        <svg viewBox="0 0 600 500" preserveAspectRatio="xMidYMid slice">
+          <defs><linearGradient id="rock" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d5b58a"/><stop offset=".55" stop-color="#9b7652"/><stop offset="1" stop-color="#5c4533"/></linearGradient></defs>
+          <path d="M0 80 L95 35 170 68 250 22 338 74 420 35 510 78 600 50 V500 H0Z" fill="url(#rock)"/>
+          <path d="M0 300 L95 245 165 265 240 205 310 250 390 195 480 240 600 185 V500 H0Z" fill="#6f523b" opacity=".55"/>
+          <g stroke="#3e3025" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".92">
+            <circle cx="155" cy="173" r="22"/><path d="M155 195 L155 260 M155 213 L118 238 M155 213 L191 236 M155 260 L130 296 M155 260 L182 294"/>
+            <circle cx="280" cy="155" r="18"/><path d="M280 175 L280 235 M280 193 L250 210 M280 193 L310 212 M280 235 L260 265 M280 235 L301 263"/>
+            <path d="M380 245 Q415 205 452 245 Q415 280 380 245Z"/>
+            <path d="M80 365 Q125 325 170 365 Q125 405 80 365Z"/>
+            <circle cx="500" cy="330" r="16"/><path d="M500 348 L500 400 M500 365 L473 382 M500 365 L527 382 M500 400 L483 425 M500 400 L517 425"/>
+          </g>
+        </svg>
+        <div class="art-label">
+          <span data-key="hero.art.sub">Маңғыстау мұрасы</span>
+          <strong data-key="hero.art.title">Өткеннен — болашаққа</strong>
+        </div>
+      </div>
+    </section>
+
+    <section id="catalog">
+      <div class="container">
+        <div class="section-head">
+          <span class="pill" data-key="catalog.pill">Цифрлық архив</span>
+          <h2 data-key="catalog.title">Петроглифтер каталогы</h2>
+        </div>
+        <div class="catalog-tools">
+          <input id="searchInput" type="search" data-key-placeholder="catalog.search" placeholder="Іздеу…">
+          <select id="typeFilter">
+            <option value="all" data-key="filter.all">Барлық санат</option>
+            <option value="адам" data-key="filter.human">Адам бейнесі</option>
+            <option value="жануар" data-key="filter.animal">Жануар бейнесі</option>
+            <option value="таңба" data-key="filter.symbol">Геометриялық таңба</option>
+          </select>
+        </div>
+        <div class="cards" id="cards"></div>
+        <div class="notice" data-key="catalog.notice"><strong>Ғылыми адалдық:</strong> карточкалардағы иллюстрациялар — көркем үлгі. Нақты нысандардың фотосуреттері мен деректерін өз зерттеуіңізбен толықтырыңыз.</div>
+      </div>
+    </section>
+
+    <section class="qr-section" id="qr">
+      <div class="container qr-layout">
+        <div>
+          <span class="pill" data-key="qr.pill">Сандық қолжетімділік</span>
+          <h2 data-key="qr.title">Бір код — бір тарихи оқиғаға жол</h2>
+          <p data-key="qr.desc">Әр петроглифтің өз беті және өз QR-коды бар. Турист тарихи орынға келгенде QR-кодты сканерлеп, сол жер туралы толық ақпаратты оқи алады.</p>
+          <p style="margin-top:16px;font-size:14px;color:#6c6153" data-key="qr.howto"><strong>Қалай жасалады:</strong> Каталогтан петроглифті таңда → оның бетіне өт → осы беттің сілтемесін көшір → QR-код жаса → тақтаға орнат.</p>
+        </div>
+        <div class="qr-box">
+          <h3 data-key="qr.generator">QR-код генераторы</h3>
+          <p style="font-size:12px;color:#7a6f5f" data-key="qr.hint">Сілтемені енгізіңіз (мыс.: петроглиф бетінің URL)</p>
+          <input id="qrUrl" type="url" placeholder="https://example.com/#airakty-01">
+          <button class="btn" id="makeQr" style="width:100%" data-key="qr.make">QR-код жасау</button>
+          <div id="qrPreview"><span class="placeholder" data-key="qr.placeholder">QR-код осында пайда болады</span></div>
+          <button class="btn secondary hidden" id="downloadQr" style="width:100%;margin-top:10px" data-key="qr.download">Суретті жүктеу</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <strong>MANGYSTAU PETROGLYPHS</strong>
+        <p data-key="footer.tagline">Тасқа жазылған тарихты цифрлық болашақпен байланыстырамыз.</p>
+      </div>
+      <div>
+        <p data-key="footer.note1">Оқу-зерттеу жобасы · 2026</p>
+        <p data-key="footer.note2">Тарихи мәліметтерді енгізер алдында дереккөздерді тексеріңіз.</p>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ============ ЖЕКЕ ПЕТРОГЛИФ БЕТІ ============ -->
+<div id="petroglyphPage" class="petroglyph-page hidden"></div>
+
+<script>
+/* ============================================================
+   ДЕРЕКТЕР БАЗАСЫ — осында өз петроглифтеріңді қос
+   ============================================================ */
+const PETROGLYPHS = {
+  "airakty-01": {
+    id: "airakty-01",
+    category: "адам",
+    coords: "44.5231° N, 51.2847° E",
+    svg: "human",
+    kz: {
+      title: "Антропоморф бейне",
+      period: "XIV–XVIII ғғ.",
+      location: "Айрақты тауы, Маңғыстау ауданы",
+      desc: "Бұл бейне адамға ұқсас пішінде қашалған. Басы дөңгелек, қолдары екі жаққа созылған. Зерттеушілер оны аңшылық немесе діни рәсіммен байланыстырады. Мұндай бейнелер ежелгі тайпалардың дүниетанымын, әсіресе ата-баба рухына табыну дәстүрін көрсетеді.",
+      source: "Самашев З. «Петроглифы Мангистау», Алматы, 2018, 45-б."
+    },
+    ru: {
+      title: "Антропоморфный образ",
+      period: "XIV–XVIII вв.",
+      location: "Гора Айракты, Мангистауский район",
+      desc: "Изображение высечено в форме, напоминающей человека. Голова круглая, руки раскинуты в стороны. Исследователи связывают его с охотой или религиозным обрядом. Подобные образы отражают мировоззрение древних племён, особенно культ предков.",
+      source: "Самашев З. «Петроглифы Мангистау», Алматы, 2018, с. 45"
+    },
+    en: {
+      title: "Anthropomorphic figure",
+      period: "14th–18th centuries",
+      location: "Airakty Mountain, Mangystau District",
+      desc: "This image is carved in a human-like form. The head is round, arms stretched to the sides. Researchers associate it with hunting or religious rituals. Such images reflect the worldview of ancient tribes, especially ancestor worship.",
+      source: "Samashev Z. 'Petroglyphs of Mangystau', Almaty, 2018, p. 45"
+    }
+  },
+  "koskudyq-01": {
+    id: "koskudyq-01",
+    category: "жануар",
+    coords: "43.8912° N, 52.1045° E",
+    svg: "animal",
+    kz: {
+      title: "Мүйізді жануар",
+      period: "Б.з.д. II мыңжылдық",
+      location: "Қосқұдық, Маңғыстау ауданы",
+      desc: "Мүйізді жануар бейнесі — ежелгі тайпалардың тотемдік символы болуы мүмкін. Мұндай бейнелер мал шаруашылығымен және аңшылықпен байланысты. Жануардың пішіні мен мүйізінің ұзындығы оның киелілігін білдіреді.",
+      source: "Маңғыстау облыстық мұражайының материалдары, 2020"
+    },
+    ru: {
+      title: "Рогатое животное",
+      period: "II тыс. до н.э.",
+      location: "Косkuduk, Мангистауский район",
+      desc: "Изображение рогатого животного — возможно, тотемный символ древних племён. Такие образы связаны со скотоводством и охотой. Форма животного и длина рогов указывают на его сакральность.",
+      source: "Материалы Мангистауского областного музея, 2020"
+    },
+    en: {
+      title: "Horned animal",
+      period: "2nd millennium BC",
+      location: "Koskuduk, Mangystau District",
+      desc: "The image of a horned animal may be a totemic symbol of ancient tribes. Such images are linked to pastoralism and hunting. The animal's shape and long horns indicate its sacred nature.",
+      source: "Mangystau Regional Museum materials, 2020"
+    }
+  },
+  "akmaya-01": {
+    id: "akmaya-01",
+    category: "таңба",
+    coords: "44.6015° N, 50.9453° E",
+    svg: "symbol",
+    kz: {
+      title: "Күн таңбасы",
+      period: "Б.з.д. I мыңжылдық – XV ғ.",
+      location: "Ақмая, Түпқараған ауданы",
+      desc: "Шеңбер мен сәулелерден тұратын күн таңбасы — ежелгі адамдардың күнге табынуын білдіреді. Мұндай таңбалар көбінесе құрбандық орындарының жанында кездеседі. Күн — өмір, жарық және қуаттың символы.",
+      source: "Ғылыми-зерттеу мақаласы, 2019"
+    },
+    ru: {
+      title: "Солярный знак",
+      period: "I тыс. до н.э. – XV в.",
+      location: "Акмая, Тупкараганский район",
+      desc: "Солярный знак, состоящий из круга и лучей, символизирует поклонение солнцу у древних людей. Такие знаки часто встречаются рядом с местами жертвоприношений. Солнце — символ жизни, света и силы.",
+      source: "Научно-исследовательская статья, 2019"
+    },
+    en: {
+      title: "Solar symbol",
+      period: "1st millennium BC – 15th c.",
+      location: "Akmaya, Tupkaragan District",
+      desc: "The solar symbol, consisting of a circle and rays, represents sun worship by ancient people. Such signs are often found near sacrificial sites. The sun symbolizes life, light, and power.",
+      source: "Research article, 2019"
+    }
+  },
+  "sherqala-01": {
+    id: "sherqala-01",
+    category: "адам",
+    coords: "44.3567° N, 50.6891° E",
+    svg: "human",
+    kz: {
+      title: "Аңшы бейнесі",
+      period: "Б.з.д. I мыңжылдық",
+      location: "Шерқала, Түпқараған ауданы",
+      desc: "Аңшы бейнесі қолында садақ ұстаған адамды көрсетеді. Бұл ежелгі тұрғындардың негізгі кәсібі аңшылық болғанын дәлелдейді. Бейненің қасында ит пен бұғы бейнелері де кездеседі.",
+      source: "Археологиялық экспедиция есебі, 2017"
+    },
+    ru: {
+      title: "Образ охотника",
+      period: "I тыс. до н.э.",
+      location: "Шеркала, Тупкараганский район",
+      desc: "Образ охотника изображает человека с луком в руках. Это доказывает, что охота была основным занятием древних жителей. Рядом с фигурой встречаются изображения собаки и оленя.",
+      source: "Отчёт археологической экспедиции, 2017"
+    },
+    en: {
+      title: "Hunter figure",
+      period: "1st millennium BC",
+      location: "Sherkala, Tupkaragan District",
+      desc: "The hunter figure depicts a person holding a bow. This proves that hunting was the main occupation of ancient inhabitants. Images of a dog and deer are also found nearby.",
+      source: "Archaeological expedition report, 2017"
+    }
+  },
+  "qosqula-01": {
+    id: "qosqula-01",
+    category: "жануар",
+    coords: "43.7214° N, 52.3145° E",
+    svg: "animal",
+    kz: {
+      title: "Түйе бейнесі",
+      period: "XIV–XVII ғғ.",
+      location: "Қосқұла, Маңғыстау ауданы",
+      desc: "Түйе бейнесі — көшпелі өмір салтының символы. Түйелер ежелгі тұрғындар үшін көлік, азық-түлік және байлық көзі болды. Бұл бейнелер сауда жолдарының маңыздылығын да көрсетеді.",
+      source: "Өлкетану материалдары, 2018"
+    },
+    ru: {
+      title: "Изображение верблюда",
+      period: "XIV–XVII вв.",
+      location: "Косkula, Мангистауский район",
+      desc: "Изображение верблюда — символ кочевого образа жизни. Верблюды были для древних жителей транспортом, источником пищи и богатства. Эти образы также указывают на важность торговых путей.",
+      source: "Краеведческие материалы, 2018"
+    },
+    en: {
+      title: "Camel figure",
+      period: "14th–17th centuries",
+      location: "Koskula, Mangystau District",
+      desc: "The camel figure symbolizes the nomadic lifestyle. Camels served as transport, food source, and wealth for ancient inhabitants. These images also indicate the importance of trade routes.",
+      source: "Local history materials, 2018"
+    }
+  },
+  "torysh-01": {
+    id: "torysh-01",
+    category: "таңба",
+    coords: "44.4271° N, 51.0263° E",
+    svg: "symbol",
+    kz: {
+      title: "Рулық таңба (тамға)",
+      period: "XIII–XVIII ғғ.",
+      location: "Торыш, Маңғыстау ауданы",
+      desc: "Рулық таңба — белгілі бір ру мен тайпаның символы. Мұндай таңбалар малға, жерге және басқа мүлікке қойылатын белгі ретінде де қолданылды. Олар Қазақ хандығы дәуірінің тарихын зерттеуге маңызды дереккөз болып табылады.",
+      source: "Тарих ғылымдарының кандидаты диссертациясынан, 2016"
+    },
+    ru: {
+      title: "Родовой знак (тамга)",
+      period: "XIII–XVIII вв.",
+      location: "Торыш, Мангистауский район",
+      desc: "Родовой знак — символ определённого рода и племени. Такие знаки использовались и как метки на скот, землю и другое имущество. Они являются важным источником для изучения эпохи Казахского ханства.",
+      source: "Из диссертации кандидата исторических наук, 2016"
+    },
+    en: {
+      title: "Tribal sign (tamga)",
+      period: "13th–18th centuries",
+      location: "Torysh, Mangystau District",
+      desc: "The tribal sign is a symbol of a specific clan and tribe. Such signs were also used as marks on livestock, land, and other property. They are an important source for studying the era of the Kazakh Khanate.",
+      source: "From a PhD dissertation in History, 2016"
+    }
+  }
+};
+
+/* ============================================================
+   SVG ИКОНКАЛАР
+   ============================================================ */
+const SVGS = {
+  human: `<svg viewBox="0 0 200 200"><g stroke="#493629" stroke-width="6" fill="none" stroke-linecap="round"><circle cx="100" cy="55" r="22"/><path d="M100 78V150 M100 100L65 122 M100 100L135 122 M100 150L78 185 M100 150L122 185"/></g></svg>`,
+  animal: `<svg viewBox="0 0 200 200"><g stroke="#493629" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M30 105Q60 75 110 88L150 85 175 102 155 118 110 120 75 138 40 130Z"/><path d="M55 85L40 58 60 75 M67 84L80 55 78 82 M70 132L65 165 M125 120L136 157 M162 102L188 87"/></g></svg>`,
+  symbol: `<svg viewBox="0 0 200 200"><g stroke="#493629" stroke-width="6" fill="none" stroke-linecap="round"><circle cx="100" cy="100" r="55"/><circle cx="100" cy="100" r="22"/><path d="M100 45V155 M45 100H155 M62 62L138 138 M138 62L62 138"/></g></svg>`
+};
+
+/* ============================================================
+   ТІЛ АУДАРМАЛАРЫ
+   ============================================================ */
+const UI = {
+  kz: {
+    "nav.catalog":"Каталог","nav.about":"Жоба туралы","nav.qr":"QR-гид",
+    "hero.eyebrow":"Цифрлық мұра · Маңғыстау",
+    "hero.title":"Тасқа жазылған <em>тарих.</em>",
+    "hero.lead":"Ежелгі петроглифтерді цифрлық каталогқа біріктіріп, жасанды интеллект көмегімен зерттеуге және QR-код арқылы көпшілікке таныстыруға арналған жоба.",
+    "hero.btn1":"Каталогты қарау ↘","hero.btn2":"QR-код жасау",
+    "hero.art.sub":"Маңғыстау мұрасы","hero.art.title":"Өткеннен — болашаққа",
+    "catalog.pill":"Цифрлық архив","catalog.title":"Петроглифтер каталогы",
+    "catalog.search":"Іздеу…",
+    "filter.all":"Барлық санат","filter.human":"Адам бейнесі","filter.animal":"Жануар бейнесі","filter.symbol":"Геометриялық таңба",
+    "catalog.notice":"<strong>Ғылыми адалдық:</strong> карточкалардағы иллюстрациялар — көркем үлгі. Нақты нысандардың фотосуреттері мен деректерін өз зерттеуіңізбен толықтырыңыз.",
+    "qr.pill":"Сандық қолжетімділік","qr.title":"Бір код — бір тарихи оқиғаға жол",
+    "qr.desc":"Әр петроглифтің өз беті және өз QR-коды бар. Турист тарихи орынға келгенде QR-кодты сканерлеп, сол жер туралы толық ақпаратты оқи алады.",
+    "qr.howto":"<strong>Қалай жасалады:</strong> Каталогтан петроглифті таңда → оның бетіне өт → осы беттің сілтемесін көшір → QR-код жаса → тақтаға орнат.",
+    "qr.generator":"QR-код генераторы","qr.hint":"Сілтемені енгізіңіз (мыс.: петроглиф бетінің URL)",
+    "qr.make":"QR-код жасау","qr.placeholder":"QR-код осында пайда болады","qr.download":"Суретті жүктеу",
+    "footer.tagline":"Тасқа жазылған тарихты цифрлық болашақпен байланыстырамыз.",
+    "footer.note1":"Оқу-зерттеу жобасы · 2026","footer.note2":"Тарихи мәліметтерді енгізер алдында дереккөздерді тексеріңіз.",
+    "detail":"Толығырақ →","back":"← Каталогқа оралу","desc":"Сипаттама","source":"Дереккөз","speak":"🔊 Дауыстап оқу","notFound":"Петроглиф табылмады"
+  },
+  ru: {
+    "nav.catalog":"Каталог","nav.about":"О проекте","nav.qr":"QR-гид",
+    "hero.eyebrow":"Цифровое наследие · Мангистау",
+    "hero.title":"История, написанная <em>на камне.</em>",
+    "hero.lead":"Проект объединяет древние петроглифы в цифровой каталог, исследует их с помощью ИИ и делает доступными через QR-коды.",
+    "hero.btn1":"Смотреть каталог ↘","hero.btn2":"Создать QR-код",
+    "hero.art.sub":"Наследие Мангистау","hero.art.title":"Из прошлого — в будущее",
+    "catalog.pill":"Цифровой архив","catalog.title":"Каталог петроглифов",
+    "catalog.search":"Поиск…",
+    "filter.all":"Все категории","filter.human":"Антропоморф","filter.animal":"Зооморф","filter.symbol":"Геометрический знак",
+    "catalog.notice":"<strong>Научная честность:</strong> иллюстрации — художественные образцы. Дополните реальными фото и проверенными данными.",
+    "qr.pill":"Цифровая доступность","qr.title":"Один код — путь к одной истории",
+    "qr.desc":"У каждого петроглифа есть своя страница и свой QR-код. Турист сканирует код на месте и читает полную информацию.",
+    "qr.howto":"<strong>Как создать:</strong> выберите петроглиф в каталоге → перейдите на его страницу → скопируйте ссылку → сгенерируйте QR → установите на табличке.",
+    "qr.generator":"Генератор QR-кода","qr.hint":"Введите ссылку (напр.: URL страницы петроглифа)",
+    "qr.make":"Создать QR-код","qr.placeholder":"QR-код появится здесь","qr.download":"Скачать изображение",
+    "footer.tagline":"Соединяем историю, написанную на камне, с цифровым будущим.",
+    "footer.note1":"Учебно-исследовательский проект · 2026","footer.note2":"Перед внесением исторических данных проверьте источники.",
+    "detail":"Подробнее →","back":"← Вернуться в каталог","desc":"Описание","source":"Источник","speak":"🔊 Озвучить","notFound":"Петроглиф не найден"
+  },
+  en: {
+    "nav.catalog":"Catalog","nav.about":"About","nav.qr":"QR Guide",
+    "hero.eyebrow":"Digital Heritage · Mangystau",
+    "hero.title":"History Written <em>in Stone.</em>",
+    "hero.lead":"A project uniting ancient petroglyphs in a digital catalog, researched with AI and made accessible via QR codes.",
+    "hero.btn1":"View catalog ↘","hero.btn2":"Generate QR code",
+    "hero.art.sub":"Heritage of Mangystau","hero.art.title":"From past — to future",
+    "catalog.pill":"Digital Archive","catalog.title":"Petroglyph Catalog",
+    "catalog.search":"Search…",
+    "filter.all":"All categories","filter.human":"Anthropomorphic","filter.animal":"Zoomorphic","filter.symbol":"Geometric sign",
+    "catalog.notice":"<strong>Scientific integrity:</strong> illustrations are artistic samples. Replace with real photos and verified data.",
+    "qr.pill":"Digital Accessibility","qr.title":"One code — a path to one story",
+    "qr.desc":"Each petroglyph has its own page and QR code. Tourists scan the code on-site and read full information.",
+    "qr.howto":"<strong>How it works:</strong> pick a petroglyph → open its page → copy URL → generate QR → place on a sign.",
+    "qr.generator":"QR Code Generator","qr.hint":"Enter the URL (e.g. petroglyph page link)",
+    "qr.make":"Generate QR Code","qr.placeholder":"QR code will appear here","qr.download":"Download image",
+    "footer.tagline":"Connecting history written in stone with the digital future.",
+    "footer.note1":"Educational research project · 2026","footer.note2":"Verify sources before entering historical data.",
+    "detail":"Read more →","back":"← Back to catalog","desc":"Description","source":"Source","speak":"🔊 Read aloud","notFound":"Petroglyph not found"
+  }
+};
+
+/* ============================================================
+   ЛОГИКА
+   ============================================================ */
+let currentLang = localStorage.getItem('lang') || 'kz';
+
+function t(key){ return UI[currentLang][key] || key; }
+
+function setLang(lang){
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent.trim() === lang.toUpperCase()));
+  applyTranslations();
+  renderCards();
+  // Егер жеке бет ашық болса, оны да жаңарту
+  if(!document.getElementById('petroglyphPage').classList.contains('hidden')){
+    const id = location.hash.replace('#','');
+    if(id) renderPetroglyph(id);
+  }
+}
+
+function applyTranslations(){
+  document.querySelectorAll('[data-key]').forEach(el => {
+    const k = el.dataset.key;
+    if(UI[currentLang][k]) el.innerHTML = UI[currentLang][k];
+  });
+  document.querySelectorAll('[data-key-placeholder]').forEach(el => {
+    const k = el.dataset.keyPlaceholder;
+    if(UI[currentLang][k]) el.placeholder = UI[currentLang][k];
+  });
+  document.documentElement.lang = currentLang === 'kz' ? 'kk' : currentLang;
+}
+
+function renderCards(){
+  const container = document.getElementById('cards');
+  if(!container) return;
+  container.innerHTML = '';
+  Object.values(PETROGLYPHS).forEach(p => {
+    const data = p[currentLang];
+    const card = document.createElement('article');
+    card.className = 'card';
+    card.dataset.type = p.category;
+    card.innerHTML = `
+      <div class="card-img">${SVGS[p.svg] || SVGS.symbol}</div>
+      <div class="card-body">
+        <span class="card-meta">${data.period}</span>
+        <h3>${data.title}</h3>
+        <p>📍 ${data.location}</p>
+        <button class="btn" style="margin-top:12px;width:100%" onclick="openPetroglyph('${p.id}')">${t('detail')}</button>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+  applyFilter();
+}
+
+function applyFilter(){
+  const q = (document.getElementById('searchInput')?.value || '').toLowerCase().trim();
+  const type = document.getElementById('typeFilter')?.value || 'all';
+  document.querySelectorAll('#cards .card').forEach(card => {
+    const text = card.innerText.toLowerCase();
+    const matchText = !q || text.includes(q);
+    const matchType = type === 'all' || card.dataset.type === type;
+    card.style.display = matchText && matchType ? '' : 'none';
+  });
+}
+
+function scrollToSection(id){
+  // Егер жеке бет ашық болса, басты бетке қайту
+  if(!document.getElementById('petroglyphPage').classList.contains('hidden')){
+    showHome();
+    setTimeout(()=>document.getElementById(id)?.scrollIntoView({behavior:'smooth'}), 100);
+  } else {
+    document.getElementById(id)?.scrollIntoView({behavior:'smooth'});
+  }
+}
+
+function showHome(){
+  document.getElementById('homePage').classList.remove('hidden');
+  document.getElementById('petroglyphPage').classList.add('hidden');
+  if(location.hash) history.replaceState(null,'',location.pathname);
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+function openPetroglyph(id){
+  if(!PETROGLYPHS[id]) return;
+  location.hash = id;
+  renderPetroglyph(id);
+}
+
+function renderPetroglyph(id){
+  const p = PETROGLYPHS[id];
+  const page = document.getElementById('petroglyphPage');
+  if(!p){
+    page.innerHTML = `<h1>${t('notFound')}</h1><a class="back" onclick="showHome()">${t('back')}</a>`;
+    return;
+  }
+  const d = p[currentLang];
+  page.innerHTML = `
+    <a class="back" onclick="showHome()">${t('back')}</a>
+    <span class="period-badge">${d.period}</span>
+    <h1>${d.title}</h1>
+    <p class="coords">📍 ${d.location} · ${p.coords}</p>
+    <div class="main-image">${SVGS[p.svg] || SVGS.symbol}</div>
+    <div class="desc-block">
+      <h3>${t('desc')}</h3>
+      <p>${d.desc}</p>
+      <p class="source"><strong>${t('source')}:</strong> ${d.source}</p>
+      <button class="btn speak-btn" onclick="speakText(\`${d.desc.replace(/`/g,'\\`')}\`)">${t('speak')}</button>
+    </div>
+    <div class="desc-block">
+      <h3>📱 QR-код үшін сілтеме</h3>
+      <input type="text" readonly value="${location.href}" onclick="this.select()" style="width:100%;font-family:monospace;font-size:12px">
+      <p style="font-size:12px;color:#7a6f5f;margin-top:8px">Осы сілтемені көшіріп, QR-код жасаңыз да, тақтаға орнатыңыз.</p>
+    </div>
+  `;
+  document.getElementById('homePage').classList.add('hidden');
+  page.classList.remove('hidden');
+  window.scrollTo({top:0,behavior:'instant'});
+  applyTranslations();
+}
+
+function speakText(text){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = currentLang === 'kz' ? 'kk-KZ' : currentLang === 'ru' ? 'ru-RU' : 'en-US';
+  u.rate = 0.95;
+  speechSynthesis.speak(u);
+}
+
+/* ============================================================
+   QR ГЕНЕРАТОР
+   ============================================================ */
+function setupQR(){
+  const btn = document.getElementById('makeQr');
+  const input = document.getElementById('qrUrl');
+  const preview = document.getElementById('qrPreview');
+  const dl = document.getElementById('downloadQr');
+  if(!btn) return;
+
+  btn.addEventListener('click', () => {
+    let url = input.value.trim();
+    if(!url){ alert('Сілтемені енгізіңіз'); return; }
+    if(!/^https?:\/\//i.test(url)) url = 'https://' + url;
+    const api = 'https://api.qrserver.com/v1/create-qr-code/?size=500x500&margin=10&data=' + encodeURIComponent(url);
+    preview.innerHTML = `<img src="${api}" alt="QR" id="qrImg">`;
+    dl.classList.remove('hidden');
+  });
+
+  dl.addEventListener('click', async () => {
+    const img = document.getElementById('qrImg');
+    if(!img) return;
+    try {
+      const res = await fetch(img.src);
+      const blob = await res.blob();
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'petroglyph-qr.png';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    } catch(e){
+      window.open(img.src, '_blank');
+    }
+  });
+}
+
+/* ============================================================
+   ІСКЕ ҚОСУ
+   ============================================================ */
+document.addEventListener('DOMContentLoaded', () => {
+  // Тіл батырмаларын белсендіру
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.trim() === currentLang.toUpperCase());
+  });
+  applyTranslations();
+  renderCards();
+  setupQR();
+
+  // Іздеу + сүзгі
+  document.getElementById('searchInput')?.addEventListener('input', applyFilter);
+  document.getElementById('typeFilter')?.addEventListener('change', applyFilter);
+
+  // URL-де #id болса — петроглиф бетін ашу (QR осылай ашады)
+  const hash = location.hash.replace('#','');
+  if(hash && PETROGLYPHS[hash]) renderPetroglyph(hash);
+
+  // Хэш өзгерген кезде
+  window.addEventListener('hashchange', () => {
+    const h = location.hash.replace('#','');
+    if(h && PETROGLYPHS[h]) renderPetroglyph(h);
+    else showHome();
+  });
+});
+</script>
+</body>
+</html>
